@@ -15,7 +15,7 @@ import Header from './Components/Header/Header';
 import Login from './Components/Login/Login';
 import Dashboard from './Components/Dashboard/Dashboard';
 import ApplyLoan from './Components/ApplyLoan/ApplyLoan';
-import UpdateDetails from './Components/UpdateDetails/UpdateDetails';
+import DepositAmount from './Components/DepositAmount/DepositAmount';
 import Registration from './Components/Registration/Registration'
 import PageNotFound from './Components/Authentication/PageNotFound';
 
@@ -30,29 +30,28 @@ render(){
   return (
     <div className="App">
       <Router>
-        {/* top header menus */}
-          {isAuthenticate ?<Header />:null}
+          {isAuthenticate ? <Header />:null}
         <div>
-          {
-            !isAuthenticate ?
-              <Switch>
-                <Route exact path="/">
-                  <Login />
-                </Route>
-                <Route path="/registration">
-                  <Registration />
-                </Route>
-                <Redirect
-                  to={{
-                  pathname: "/",
-                  // state: { from: location }
-                 }}
-               /> 
-                <Route path="*">
-                   <PageNotFound />
-                </Route>
-              </Switch>
-              :
+          { 
+          !isAuthenticate ?
+               <Switch>
+                 <Route exact path="/">
+                   <Login />
+                  </Route>
+                 <Route path="/registration">
+               <Registration />
+                 </Route>
+                 <Redirect
+                   to={{
+                   pathname: "/",
+                   // state: { from: location }
+                  }}
+                /> 
+                 <Route path="*">
+                    <PageNotFound />
+                 </Route>
+               </Switch>
+               :
               <Switch>
                 <Route exact path="/dashboard">
                   <Dashboard />
@@ -60,11 +59,11 @@ render(){
                 <Route exact path="/applyLoan">
                   <ApplyLoan />
                 </Route>
-                <Route path="/updateDetails">
-                  <UpdateDetails />
+                <Route path="/depositAmount">
+                  <DepositAmount />
                 </Route>
               </Switch>
-          }
+         } 
         </div>
       </Router>
     </div>

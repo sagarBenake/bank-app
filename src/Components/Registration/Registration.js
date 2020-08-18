@@ -47,7 +47,7 @@ class Registration extends Component {
                 this.handleChange_age(value)
             }
             if(name=='customerName'){
-                this.validateCutomerName(value)
+                // this.validateCutomerName(value)
                 // value = value.replace(/[^A-Za-z]/gi, "");
             }
         })
@@ -130,8 +130,8 @@ class Registration extends Component {
                     <Form.Item
                         name="customerName"
                         label="Name"
-                        validateStatus={this.state.validateStatus}
-                        help={this.state.errorMsg}
+                        // validateStatus={this.state.validateStatus}
+                        // help={this.state.errorMsg}
                         rules={[
                             {
                                 required: true,
@@ -254,8 +254,8 @@ class Registration extends Component {
                     <Form.Item
                         name="contactNumber"
                         label="Contact Number"
-                        validateStatus={this.state.validateStatus}
-                        help={this.state.errorMsg}
+                        // validateStatus={this.state.validateStatus}
+                        // help={this.state.errorMsg}
                         rules={[
                             {
                                 required: true,

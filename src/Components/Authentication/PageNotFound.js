@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import errorLogo from './images/error.jpg'
+import { withRouter } from 'react-router-dom';
+import {Button} from 'antd';
 
 class PageNotFound extends Component {
+    navigateToLogin = () => {
+        this.props.history.push({pathname:'/login'});
+    }
     render() {
         return (
             <div>
-                oops!! Page not found...
+                <img src={errorLogo} />
+                <div>
+                   <Button type="primary" shape="round" onClick={this.navigateToLogin}>Go Back</Button>
+                </div>
             </div>
         );
     }
@@ -15,4 +23,4 @@ PageNotFound.propTypes = {
 
 };
 
-export default PageNotFound;
+export default withRouter(PageNotFound);
