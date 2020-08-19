@@ -16,6 +16,7 @@ import {
 import { withRouter } from "react-router-dom";
 import moment from 'moment';
 import { QuestionCircleOutlined } from '@ant-design/icons';
+import countries from './countrys.json'
 
 
 const { TextArea } = Input;
@@ -29,37 +30,46 @@ class Registration extends Component {
         this.state = {
             customerName: "",
             username: "",
-            password:"",
+            password: "",
             address: "",
             country: "",
-            state:"",
-            email:"",
-            contactNumber:null,
-            dob:"",
-            customerAge:null,
-            citizenStatus:"",
-            accountType:"",
-            branchName:"",
-            initDepositAmount:null,
-            initProofType:"",
-            initDocumentNo:"",
-            validateStatus:null,
-            errorMsg:null
+            state: "",
+            email: "",
+            contactNumber: null,
+            dob: "",
+            customerAge: null,
+            citizenStatus: "",
+            accountType: "",
+            branchName: "",
+            initDepositAmount: null,
+            initProofType: "",
+            initDocumentNo: "",
+            validateStatus: null,
+            errorMsg: null,
+            stateList: []
         }
-        
+
+
     }
 
     // handle change text
     handleChangeText = (value, name) => {
         console.log(value, ",", name);
-        this.setState({ [name]: value },()=>{
-            if(name=='dob'){
+        this.setState({ [name]: value }, () => {
+            if (name == 'dob') {
                 this.handleChange_age(value)
             }
-            if(name=='customerName'){
-                // this.validateCutomerName(value)
-                // value = value.replace(/[^A-Za-z]/gi, "");
-            }
+        })
+    }
+
+    handleChangeCountry = (countryName) => {
+        console.log(countryName);
+        let countrList = countries.countries;
+        let countryObject = countrList.find(k => k.country == countryName);
+        this.setState({
+            ...this.state,
+            stateList: countryObject.states,
+            country: countryName
         })
     }
 
@@ -77,37 +87,21 @@ class Registration extends Component {
     //Check age and Citizen status
     handleChange_age = (dob) => {
         let currentAge = Math.abs((moment().year()) - (moment(dob, "DD/MM/YYYY").year()));
-        let statusOfcitizen=null;
-        if(currentAge<18){
-            statusOfcitizen="Minor";
-        }else if(currentAge>18 && currentAge<=60){
-            statusOfcitizen="Normal";
-        }else if(currentAge>60){
-            statusOfcitizen="Senior";
+        let statusOfcitizen = null;
+        if (currentAge < 18) {
+            statusOfcitizen = "Minor";
+        } else if (currentAge > 18 && currentAge <= 60) {
+            statusOfcitizen = "Normal";
+        } else if (currentAge > 60) {
+            statusOfcitizen = "Senior";
         }
         this.setState({
             ...this.state,
-            customerAge:currentAge,
-            citizenStatus:statusOfcitizen
+            customerAge: currentAge,
+            citizenStatus: statusOfcitizen
         })
     }
-    // Validate customer name
-    validateCutomerName = (custName) => {
-        if(!custName.match(/^[A-Za-z]+$/)){
-            this.setState({
-                ...this.state,
-                validateStatus:"error",
-                errorMsg:"Only alphabets are allowed"
-            })  
-        }else{
-            this.setState({
-                ...this.state,
-                validateStatus:null,
-                errorMsg:null
-            })
-        }
-    }
-    
+
     render() {
         const formItemLayout = {
             labelCol: {
@@ -146,11 +140,14 @@ class Registration extends Component {
                             {
                                 required: true,
                                 message: 'Please input your name!',
-                                whitespace: true,
-                            },
+                                whitespace: true
+                            }, {
+                                pattern: /^([a-z]+\s)*[a-z]+$/,
+                                message: 'Please input alphabets only!',
+                            }
                         ]}
                     >
-                        <Input onChange={e => this.handleChangeText(e.target.value, "customerName")} />
+                        <Input onChange={e => this.handleChangeText(e.target.value, "username")} />
                     </Form.Item>
 
                     <Form.Item
@@ -209,14 +206,18 @@ class Registration extends Component {
                             showSearch
                             placeholder="Select a country"
                             optionFilterProp="children"
-                            onChange={e => this.handleChangeText(e, "country")}
+                            onChange={e => this.handleChangeCountry(e)}
                             filterOption={(input, option) =>
                                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                             }
                         >
-                            <Option value="India">India</Option>
-                            <Option value="China">China</Option>
-                            <Option value="US">US</Option>
+                            {
+                                countries.countries.map((cname, i) => {
+                                    return (
+                                        <Option value={cname.country} key={i}>{cname.country}</Option>
+                                    )
+                                })
+                            }
                         </Select>
                     </Form.Item>
 
@@ -238,11 +239,14 @@ class Registration extends Component {
                             filterOption={(input, option) =>
                                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                             }
-                            
                         >
-                            <Option value="karnataka">Karnataka</Option>
-                            <Option value="goa">Goa</Option>
-                            <Option value="kerala">Kerala</Option>
+                            {
+                                this.state.stateList.map((sname, i) => {
+                                    return (
+                                        <Option value={sname} key={i}>{sname}</Option>
+                                    )
+                                })
+                            }
                         </Select>
                     </Form.Item>
 
@@ -275,6 +279,10 @@ class Registration extends Component {
                                 type: 'number'
 
                             },
+                            {
+                                pattern: /^[2-9]{2}[0-9]{8}$/,
+                                message: 'Please input valid contact number!',
+                            }
                         ]}
                     >
 
@@ -300,7 +308,7 @@ class Registration extends Component {
                             format="DD/MM/YYYY"
                             disabledDate={disabledDate}
                             style={{ width: '100%' }}
-                            onChange={e => 
+                            onChange={e =>
                                 this.handleChangeText(moment(e).format("DD/MM/YYYY"), "dob")
                             }
                         />
@@ -310,8 +318,8 @@ class Registration extends Component {
                         name="currentAge"
                         label="Your age is"
                     >
-                    <Input value={this.state.customerAge} disabled/>
-                    <span></span> 
+                        <Input value={this.state.customerAge} disabled />
+                        <span></span>
                     </Form.Item>
 
 
@@ -319,8 +327,8 @@ class Registration extends Component {
                         name="citizenStatus"
                         label="Citizen Status"
                     >
-                    <Input value={this.state.citizenStatus} disabled/>
-                    <span></span>
+                        <Input value={this.state.citizenStatus} disabled />
+                        <span></span>
                     </Form.Item>
 
                     <Form.Item
@@ -417,11 +425,6 @@ class Registration extends Component {
 
 
                 </Form>
-                {/* <div>
-                    <div style={{ marginTop: 10 }}>
-                        <Button onClick={this.submitForm}>Register</Button>
-                    </div>
-                </div> */}
             </div>
         );
     }
