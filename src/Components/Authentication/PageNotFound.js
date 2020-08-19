@@ -5,7 +5,7 @@ import {Button} from 'antd';
 
 class PageNotFound extends Component {
     navigateToLogin = () => {
-        this.props.history.push({pathname:'/login'});
+        this.props.history.push({pathname:'/'});
     }
     render() {
         return (

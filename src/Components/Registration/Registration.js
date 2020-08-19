@@ -29,10 +29,20 @@ class Registration extends Component {
         this.state = {
             customerName: "",
             username: "",
+            password:"",
             address: "",
             country: "",
+            state:"",
+            email:"",
+            contactNumber:null,
+            dob:"",
             customerAge:null,
             citizenStatus:"",
+            accountType:"",
+            branchName:"",
+            initDepositAmount:null,
+            initProofType:"",
+            initDocumentNo:"",
             validateStatus:null,
             errorMsg:null
         }
@@ -224,13 +234,15 @@ class Registration extends Component {
                             showSearch
                             placeholder="Select a state"
                             optionFilterProp="children"
+                            onChange={e => this.handleChangeText(e, "state")}
                             filterOption={(input, option) =>
                                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                             }
+                            
                         >
-                            <Option value="jack">Jack</Option>
-                            <Option value="lucy">Lucy</Option>
-                            <Option value="tom">Tom</Option>
+                            <Option value="karnataka">Karnataka</Option>
+                            <Option value="goa">Goa</Option>
+                            <Option value="kerala">Kerala</Option>
                         </Select>
                     </Form.Item>
 
@@ -328,6 +340,7 @@ class Registration extends Component {
                             filterOption={(input, option) =>
                                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                             }
+                            onChange={e => this.handleChangeText(e, "accountType")}
                         >
                             <Option value="salary">Salary</Option>
                             <Option value="saving">Saving</Option>
@@ -361,7 +374,7 @@ class Registration extends Component {
                         <InputNumber
                             min={1}
                             style={{ width: '100%' }}
-                            onChange={e => this.handleChangeText(e.target.value, "initDepositAmount")}
+                            onChange={e => this.handleChangeText(e, "initDepositAmount")}
                         />
                     </Form.Item>
 

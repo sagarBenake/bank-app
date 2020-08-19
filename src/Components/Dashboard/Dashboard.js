@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios'
 import { Descriptions,Divider  } from 'antd';
 import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 
 class Dashboard extends Component {
+
+
+    componentDidMount(){
+        axios.get("http://localhost:3333/registration?email=sagar.benake@hotmail.com").then(response => {
+            console.log(response.customerName)
+        })
+    }
     render() {
         return (
                 <div>

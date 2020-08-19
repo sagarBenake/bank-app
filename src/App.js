@@ -8,7 +8,7 @@ import {
   Route,
   Link,
   useParams,
-  useRouteMatch,Redirect
+  useRouteMatch, Redirect
 } from "react-router-dom";
 import { connect } from 'react-redux';
 import Header from './Components/Header/Header';
@@ -19,56 +19,43 @@ import DepositAmount from './Components/DepositAmount/DepositAmount';
 import Registration from './Components/Registration/Registration'
 import PageNotFound from './Components/Authentication/PageNotFound';
 
-import { useDispatch,useStore } from 'react-redux';
+import { useDispatch, useStore } from 'react-redux';
 import { Menu } from 'antd';
 import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 
 class App extends Component {
-  
-render(){
-  const {isAuthenticate}=this.props;
-  return (
-    <div className="App">
-      <Router>
-          {isAuthenticate ? <Header />:null}
-        <div>
-          { 
-          !isAuthenticate ?
-               <Switch>
-                 <Route exact path="/">
-                   <Login />
-                  </Route>
-                 <Route path="/registration">
-               <Registration />
-                 </Route>
-                 <Redirect
-                   to={{
-                   pathname: "/",
-                   // state: { from: location }
-                  }}
-                /> 
-                 <Route path="*">
-                    <PageNotFound />
-                 </Route>
-               </Switch>
-               :
-              <Switch>
-                <Route exact path="/dashboard">
-                  <Dashboard />
-                </Route>
-                <Route exact path="/applyLoan">
-                  <ApplyLoan />
-                </Route>
-                <Route path="/depositAmount">
-                  <DepositAmount />
-                </Route>
-              </Switch>
-         } 
-        </div>
-      </Router>
-    </div>
-  );
-}
+
+  render() {
+    const { isAuthenticate } = this.props;
+    return (
+      <div className="App">
+        <Router>
+          {isAuthenticate ? <Header /> : null}
+          <div>
+            {
+              !isAuthenticate ?
+                <Switch>
+                  <Route exact path="/" component={Login} />
+                  <Route path="/registration" component={Registration} />
+                  <Route path="*" component={PageNotFound} />
+                  <Redirect
+                    to={{
+                      pathname: "/"
+                    }}
+                  />
+                </Switch>
+                :
+                <Switch>
+                  <Route exact path="/dashboard" component={Dashboard} />
+                  <Route exact path="/applyLoan" component={ApplyLoan} />
+                  <Route path="/depositAmount" component={DepositAmount} />
+                </Switch>
+            }
+          </div>
+        </Router>
+      </div>
+    );
+  }
 }
 
 // export default App;

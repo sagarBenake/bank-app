@@ -1,0 +1,57 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "registration":[
+    {
+      "customerName": "Sagar Tukaram Benake",
+      "username": "sagarbenake",
+      "password":"sagarbenake",
+      "address": "Plot No 94 Raghavendra Nagar Khasbag,Belgaum",
+      "country": "India",
+      "state":"Karnataka",
+      "email":"sagar.benake@hotmail.com",
+      "contactNumber":9738680443,
+      "dob":"25/02/1991",
+      "customerAge":29,
+      "citizenStatus":"Normal",
+      "accountType":"Salary",
+      "branchName":"M.G Road",
+      "initDepositAmount":5000,
+      "initProofType":"Pan Card",
+      "initDocumentNo":"PGBN002"
+    },
+    {
+      "customerName": "Mahesh Parshram Patil",
+      "username": "maheshpatil",
+      "password":"sagarbenake",
+      "address": "Plot No 94 Raghavendra Nagar Khasbag,Belgaum",
+      "country": "India",
+      "state":"Karnataka",
+      "email":"mahesh.patil@hotmail.com",
+      "contactNumber":9738680443,
+      "dob":"25/02/1991",
+      "customerAge":29,
+      "citizenStatus":"Normal",
+      "accountType":"Salary",
+      "branchName":"M.G Road",
+      "initDepositAmount":5000,
+      "initProofType":"Pan Card",
+      "initDocumentNo":"PGBN002"
+    }
+  ]
+}
