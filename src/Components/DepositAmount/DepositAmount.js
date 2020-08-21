@@ -14,17 +14,39 @@ import {
     Button,
     AutoComplete, InputNumber, DatePicker,
 } from 'antd';
+import SweetAlert from 'sweetalert-react';
+import 'sweetalert/dist/sweetalert.css';
 import moment from 'moment';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 
 class DepositAmount extends Component {
-
+    
     constructor(props) {
         super(props);
         this.state = {
-            
+            accountType:"Salary",
+            currentBalance:5000,
+            depositAmount:null
         }
     }
+
+     // handle change text
+     handleChangeText = (value, name) => {
+        this.setState({ [name]: value })
+    }
+
+    //submit form
+    submitForm = () => {
+       let newCurrentBalance=this.state.currentBalance+this.state.depositAmount;
+       if(this.state.depositAmount!=null)
+       this.setState({ 
+           currentBalance: newCurrentBalance,
+           depositAmount:null,
+           show: true 
+        });
+       
+    }
+
 
     render() {
         const formItemLayout = {
@@ -48,21 +70,23 @@ class DepositAmount extends Component {
                 <Divider style={{color:'#2780FF'}}>Deposit Amount into Account</Divider>
                 <Form
                     {...formItemLayout}
-                    name="depositAmount"
+                    name="deposit"
                     scrollToFirstError
                 >
                     <Form.Item
                         name="accountType"
                         label="Account Type"
                     >
-                        <Input disabled/>
+                        <Input value={this.state.accountType} disabled/>
+                        <span></span>
                     </Form.Item>
 
                     <Form.Item
                         name="currentBalance"
                         label="Current Balace"
                     >
-                        <Input disabled/>
+                        <Input value={this.state.currentBalance} disabled/>
+                        <span></span>
                     </Form.Item>
 
                     <Form.Item
@@ -72,13 +96,14 @@ class DepositAmount extends Component {
                             {
                                 required: true,
                                 message: 'Please input your deposit amount!',
-                                whitespace: true,
                             },
                         ]}
                     >
                         <InputNumber
                             min={1}
+                            value={this.state.depositAmount}
                             style={{ width: '100%' }}
+                            onChange={e => this.handleChangeText(e, "depositAmount")}
                         />
                         <span></span>
                     </Form.Item>
@@ -94,6 +119,13 @@ class DepositAmount extends Component {
                         </Link>
                     </Form.Item>
                 </Form>
+                <SweetAlert
+                show={this.state.show}
+                title="Done"
+                text="Amount Deposited Successfully"
+                success
+                onConfirm={() => this.setState({ show: false })}
+            />
             </div>
         );
     }
