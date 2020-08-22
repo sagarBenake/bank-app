@@ -177,6 +177,8 @@ class ApplyLoan extends Component {
                     >
                         <InputNumber
                             value={this.state.loanIntreset}
+                            formatter={value => `${value}%`}
+                            parser={value => value.replace('%', '')}
                             style={{ width: '100%' }} 
                             disabled 
                         />

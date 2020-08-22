@@ -13,10 +13,13 @@ import {
     Button,
     AutoComplete, InputNumber, DatePicker,
 } from 'antd';
+import axios from 'axios';
 import { withRouter } from "react-router-dom";
 import moment from 'moment';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import countries from './countrys.json'
+import SweetAlert from 'sweetalert-react';
+import 'sweetalert/dist/sweetalert.css';
 
 
 const { TextArea } = Input;
@@ -44,17 +47,14 @@ class Registration extends Component {
             initDepositAmount: null,
             initProofType: "",
             initDocumentNo: "",
-            validateStatus: null,
-            errorMsg: null,
             stateList: []
         }
-
+      
 
     }
 
     // handle change text
     handleChangeText = (value, name) => {
-        console.log(value, ",", name);
         this.setState({ [name]: value }, () => {
             if (name == 'dob') {
                 this.handleChange_age(value)
@@ -63,7 +63,6 @@ class Registration extends Component {
     }
 
     handleChangeCountry = (countryName) => {
-        console.log(countryName);
         let countrList = countries.countries;
         let countryObject = countrList.find(k => k.country == countryName);
         this.setState({
@@ -75,8 +74,16 @@ class Registration extends Component {
 
     //submit form
     submitForm = () => {
-        console.log("form data");
-        console.log(this.state);
+        const { stateList, ...withoutStateList } = this.state;
+        axios({
+            method: 'post',
+            url: 'http://localhost:3333/registration',
+            data: withoutStateList
+          }).then(response => {
+            this.setState({ 
+                show: true 
+            });
+        })
     }
 
     // Cancel form
@@ -129,13 +136,13 @@ class Registration extends Component {
                     {...formItemLayout}
                     name="register"
                     scrollToFirstError
+                    onFinish={() => this.submitForm()}
+                    ref={this.formRef}
                 >
 
                     <Form.Item
                         name="customerName"
                         label="Name"
-                        // validateStatus={this.state.validateStatus}
-                        // help={this.state.errorMsg}
                         rules={[
                             {
                                 required: true,
@@ -147,7 +154,7 @@ class Registration extends Component {
                             }
                         ]}
                     >
-                        <Input onChange={e => this.handleChangeText(e.target.value, "username")} />
+                        <Input onChange={e => this.handleChangeText(e.target.value, "customerName")} />
                     </Form.Item>
 
                     <Form.Item
@@ -415,16 +422,21 @@ class Registration extends Component {
                     </Form.Item>
 
                     <Form.Item {...tailFormItemLayout}>
-                        <Button type="primary" htmlType="submit" onClick={this.submitForm}>
+                        <Button type="primary" htmlType="submit">
                             Register
                         </Button>
                         <Button type="default" style={{ margin: '0 8px' }} onClick={this.navigateToLogin}>
                             Cancel
                         </Button>
                     </Form.Item>
-
-
                 </Form>
+                <SweetAlert
+                    show={this.state.show}
+                    title="Done"
+                    text="Registered Successfully"
+                    success
+                    onConfirm={() => this.setState({ show: false })}
+                />
             </div>
         );
     }

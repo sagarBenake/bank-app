@@ -44,7 +44,6 @@ class DepositAmount extends Component {
            depositAmount:null,
            show: true 
         });
-       
     }
 
 
@@ -72,6 +71,7 @@ class DepositAmount extends Component {
                     {...formItemLayout}
                     name="deposit"
                     scrollToFirstError
+                    onFinish={() => this.submitForm()}
                 >
                     <Form.Item
                         name="accountType"
@@ -120,12 +120,12 @@ class DepositAmount extends Component {
                     </Form.Item>
                 </Form>
                 <SweetAlert
-                show={this.state.show}
-                title="Done"
-                text="Amount Deposited Successfully"
-                success
-                onConfirm={() => this.setState({ show: false })}
-            />
+                    show={this.state.show}
+                    title="Done"
+                    text="Amount Deposited Successfully"
+                    success
+                    onConfirm={() => this.setState({ show: false })}
+                />
             </div>
         );
     }

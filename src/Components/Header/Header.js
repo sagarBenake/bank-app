@@ -9,7 +9,7 @@ import {
 } from '@ant-design/icons';
 import {
     BrowserRouter as Router,
-    Switch,
+    withRouter,
     Route,
     Link
 } from "react-router-dom";
@@ -18,14 +18,14 @@ class Header extends Component {
     render() {
         return (
             <div >
-                <Menu mode="horizontal" style={{ backgroundColor: '#F9FCF9' }} >
-                    <Menu.Item key="dashboard" icon={<HomeOutlined />}>
+                <Menu mode="horizontal" style={{ backgroundColor: '#F9FCF9' }} selectedKeys={[this.props.location.pathname]} >
+                    <Menu.Item key="/dashboard" icon={<HomeOutlined />}>
                         <Link to="/dashboard">Dashboard</Link>
                     </Menu.Item>
-                    <Menu.Item key="applyLoan" icon={<DollarOutlined />}>
+                    <Menu.Item key="/applyLoan" icon={<DollarOutlined />}>
                         <Link to="/applyLoan">Apply Loan</Link>
                     </Menu.Item>
-                    <Menu.Item key="updateDetails" icon={<CreditCardOutlined />}>
+                    <Menu.Item key="/depositAmount" icon={<CreditCardOutlined />}>
                         <Link to="/depositAmount">Deposit Amount</Link>
                     </Menu.Item>
                     <Menu.Item key="Logout" icon={<LogoutOutlined />} style={{ float: 'right' }}>
@@ -41,4 +41,4 @@ Header.propTypes = {
 
 };
 
-export default Header;
+export default withRouter(Header);

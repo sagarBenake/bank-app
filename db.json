@@ -1,23 +1,7 @@
 {
-  "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  },
   "registration": [
     {
+      "id": 1,
       "customerName": "Sagar Tukaram Benake",
       "username": "sagarbenake",
       "password": "sagarbenake",
@@ -36,22 +20,80 @@
       "initDocumentNo": "PGBN002"
     },
     {
-      "customerName": "Mahesh Parshram Patil",
-      "username": "maheshpatil",
-      "password": "sagarbenake",
-      "address": "Plot No 94 Raghavendra Nagar Khasbag,Belgaum",
+      "customerName": "mahesh patil",
+      "username": "admin",
+      "password": "admin",
+      "address": "sulga",
       "country": "India",
-      "state": "Karnataka",
-      "email": "mahesh.patil@hotmail.com",
-      "contactNumber": 9738680443,
-      "dob": "25/02/1991",
-      "customerAge": 29,
-      "citizenStatus": "Normal",
-      "accountType": "Salary",
-      "branchName": "M.G Road",
-      "initDepositAmount": 5000,
-      "initProofType": "Pan Card",
-      "initDocumentNo": "PGBN002"
+      "state": "Andaman and Nicobar Islands",
+      "email": "mahesh@gmailc.com",
+      "contactNumber": 9900147800,
+      "dob": "07/08/2020",
+      "customerAge": 0,
+      "citizenStatus": "Minor",
+      "accountType": "saving",
+      "branchName": "ad",
+      "initDepositAmount": 1212,
+      "initProofType": "sdasd",
+      "initDocumentNo": "asdsad",
+      "id": 2
+    },
+    {
+      "customerName": "asd",
+      "username": "admin",
+      "password": "admin",
+      "address": "ad",
+      "country": "Albania",
+      "state": "Dibres",
+      "email": "asdsasd@ds.asd",
+      "contactNumber": 5454545445,
+      "dob": "06/08/2020",
+      "customerAge": 0,
+      "citizenStatus": "Minor",
+      "accountType": "saving",
+      "branchName": "sds",
+      "initDepositAmount": 31212,
+      "initProofType": "asdsa",
+      "initDocumentNo": "sadsad",
+      "id": 3
+    },
+    {
+      "customerName": "asd",
+      "username": "admin",
+      "password": "admin",
+      "address": "sad",
+      "country": "Afghanistan",
+      "state": "Badghis",
+      "email": "asd@asd.asd",
+      "contactNumber": 9900147899,
+      "dob": "07/08/2020",
+      "customerAge": 0,
+      "citizenStatus": "Minor",
+      "accountType": "salary",
+      "branchName": "sadsa",
+      "initDepositAmount": 1000,
+      "initProofType": "asds",
+      "initDocumentNo": "asdsd",
+      "id": 4
+    },
+    {
+      "customerName": "asd",
+      "username": "admin",
+      "password": "admin",
+      "address": "asdsd",
+      "country": "Albania",
+      "state": "Berat",
+      "email": "sdag@asd.cm",
+      "contactNumber": 9900147899,
+      "dob": "06/08/2020",
+      "customerAge": 0,
+      "citizenStatus": "Minor",
+      "accountType": "saving",
+      "branchName": "asdsad",
+      "initDepositAmount": 1000,
+      "initProofType": "sdsad",
+      "initDocumentNo": "asd",
+      "id": 5
     }
   ]
 }
