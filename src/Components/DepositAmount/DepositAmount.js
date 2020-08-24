@@ -30,6 +30,8 @@ class DepositAmount extends Component {
         }
     }
 
+    formRef = React.createRef();
+
      // handle change text
      handleChangeText = (value, name) => {
         this.setState({ [name]: value })
@@ -44,6 +46,7 @@ class DepositAmount extends Component {
            depositAmount:null,
            show: true 
         });
+        this.formRef.current.resetFields();
     }
 
 
@@ -72,6 +75,7 @@ class DepositAmount extends Component {
                     name="deposit"
                     scrollToFirstError
                     onFinish={() => this.submitForm()}
+                    ref={this.formRef}
                 >
                     <Form.Item
                         name="accountType"
@@ -101,15 +105,13 @@ class DepositAmount extends Component {
                     >
                         <InputNumber
                             min={1}
-                            value={this.state.depositAmount}
                             style={{ width: '100%' }}
                             onChange={e => this.handleChangeText(e, "depositAmount")}
                         />
-                        <span></span>
                     </Form.Item>
 
                     <Form.Item {...tailFormItemLayout}>
-                        <Button type="primary" htmlType="submit" onClick={this.submitForm}>
+                        <Button type="primary" htmlType="submit" >
                             Deposit Amount
                         </Button>
                         <Link to="/dashboard">

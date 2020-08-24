@@ -37,8 +37,8 @@ class App extends Component {
                 <Switch>
                   <Route exact path="/" component={Login} />
                   <Route path="/registration" component={Registration} />
-                  <Route path="*" component={PageNotFound} />
-                  <Redirect
+                   <Route exact path="*" component={PageNotFound} />
+                   <Redirect
                     to={{
                       pathname: "/"
                     }}

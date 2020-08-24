@@ -25,7 +25,7 @@ import 'sweetalert/dist/sweetalert.css';
 const { TextArea } = Input;
 const { Option } = Select;
 const { Header, Content } = Layout;
-
+const {form} = Form
 class Registration extends Component {
 
     constructor(props) {
@@ -53,6 +53,8 @@ class Registration extends Component {
 
     }
 
+    formRef = React.createRef();
+    
     // handle change text
     handleChangeText = (value, name) => {
         this.setState({ [name]: value }, () => {
@@ -81,14 +83,17 @@ class Registration extends Component {
             data: withoutStateList
           }).then(response => {
             this.setState({ 
-                show: true 
+                show: true, 
+                customerAge: null,
+                citizenStatus: "",
             });
+            this.formRef.current.resetFields();
         })
     }
 
     // Cancel form
     navigateToLogin = () => {
-        this.props.history.push({ pathname: '/login' })
+        this.props.history.push({ pathname: '/' })
     }
 
     //Check age and Citizen status
@@ -149,7 +154,7 @@ class Registration extends Component {
                                 message: 'Please input your name!',
                                 whitespace: true
                             }, {
-                                pattern: /^([a-z]+\s)*[a-z]+$/,
+                                pattern: /^([a-zA-Z]+\s)*[a-zA-Z]+$/,
                                 message: 'Please input alphabets only!',
                             }
                         ]}
